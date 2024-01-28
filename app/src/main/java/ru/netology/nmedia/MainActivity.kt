@@ -8,6 +8,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.dto.function
 import kotlin.math.floor
 
 class MainActivity : AppCompatActivity(){
@@ -41,19 +42,9 @@ class MainActivity : AppCompatActivity(){
             imageLike.setOnClickListener{
                 if (post.likeByMe) post.likes -- else post.likes ++
 
-                var countLikes = if (post.likes in 1_100000..9_999999) {
-                    (floor(post.likes / 100000.0) / 10).toString() + "M"
-                } else if (post.likes == 1000000 || post.likes >= 10_000000) {
-                    ((post.likes / 100000) / 10).toString() + "M"
-                } else if (post.likes in 1100..9999) {
-                    (floor(post.likes / 100.0) / 10).toString() + "K"
-                } else if (post.likes == 1000 || post.likes >= 10000) {
-                    ((post.likes / 100) / 10).toString() + "K"
-                } else post.likes
-
                 post.likeByMe = !post.likeByMe
                 imageLike.setImageResource(if(post.likeByMe)R.drawable.favorite_24 else R.drawable.favorite_fill0_wght400_grad0_opsz24)
-                amtLike.text = countLikes.toString()
+                amtLike.text = function(post.likes).toString()
                 
             }
 
@@ -63,16 +54,7 @@ class MainActivity : AppCompatActivity(){
             imageShare.setOnClickListener{
                 if (post.shareByMe) post.shares-- else post.shares ++
 
-                var countShare = if (post.shares in 1_100000..9_999999) {
-                    (floor(post.shares / 100000.0) / 10).toString() + "M"
-                } else if (post.shares == 1000000 || post.shares >= 10_000000) {
-                    ((post.shares / 100000) / 10).toString() + "M"
-                } else if (post.shares in 1100..9999) {
-                    (floor(post.shares / 100.0) / 10).toString() + "K"
-                } else if (post.shares == 1000 || post.shares >= 10000) {
-                    ((post.shares / 100) / 10).toString() + "K"
-                } else post.shares
-                amtShare.text = countShare.toString()
+                amtShare.text = function(post.shares).toString()
             }
 
 
