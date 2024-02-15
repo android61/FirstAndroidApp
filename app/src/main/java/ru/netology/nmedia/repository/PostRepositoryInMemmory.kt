@@ -6,9 +6,10 @@ import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.dto.function
 
 class PostRepositoryInMemoryImpl : PostRepository {
+    private var nextId = 1L
     private var posts = listOf(
         Post(
-        id = 1,
+        id = nextId++,
         author = "Нетология. Университет интернет-профессий будущего",
         content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
         published = "21 мая в 18:36",
@@ -21,7 +22,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
 
     ),
             Post(
-                id = 2,
+                id = nextId++,
                 author = "Нетология. Университет интернет-профессий будущего",
                 content = "Жди меня, и я вернусь.\n" +
                         "Только очень жди,\n" +
@@ -69,7 +70,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
 
             ),
         Post(
-            id = 3,
+            id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Во дни сомнений, во дни тягостных раздумий о судьбах моей родины, — ты один мне поддержка и опора, о великий, могучий, правдивый и свободный русский язык! Не будь тебя — как не впасть в отчаяние при виде всего, что совершается дома? Но нельзя верить, чтобы такой язык не был дан великому народу!\nИван Тургенев. 1882г.",
             published = "30 июня в 17:23",
@@ -82,7 +83,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
 
         ),
         Post(
-            id = 4,
+            id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Мужество\n" +
                     "\n" +
@@ -107,7 +108,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
 
         ),
         Post(
-            id = 5,
+            id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Клеветникам России\n" +
                     "\n" +
@@ -158,7 +159,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
                     "Есть место им в полях России,\n" +
                     "Среди нечуждых им гробов.\n" +
                     "1831 г. Александр Пушкин",
-            published = "3 февраля 1973",
+            published = "3 февраля 19:52",
             likeByMe = false,
             likes = 1524598,
             shares = 12570,
@@ -184,4 +185,21 @@ class PostRepositoryInMemoryImpl : PostRepository {
         }
         data.value = posts
     }
+
+    override fun removebyId(id: Long) {
+        posts = posts.filter { it.id != id }
+        data.value = posts
+    }
+
+    override fun save(post: Post) {
+        posts = if (post.id == 0L) {
+             listOf(post.copy(id = nextId++, published = "now", author = "Netology")) + posts
+        }else {
+            posts.map {
+                if (it.id != post.id) it else it.copy(content = post.content)
+            }
+        }
+        data.value = posts
+    }
+
 }
