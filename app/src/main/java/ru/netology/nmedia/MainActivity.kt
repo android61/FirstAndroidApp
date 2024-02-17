@@ -5,11 +5,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.repository.PostViewModel
+import ru.netology.nmedia.repository.empty
 import ru.netology.nmedia.util.AndroidUtils
 import ru.netology.nmedia.util.AndroidUtils.focusAndShowKeyboard
 import kotlin.math.floor
@@ -21,17 +23,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
-        val adapter = PostsAdapter(object:OnInteractionListener{
+        val adapter = PostsAdapter(object : OnInteractionListener {
             override fun onLike(post: Post) {
-               viewModel.likeById(post.id)
+                viewModel.likeById(post.id)
             }
+
             override fun onRemove(post: Post) {
                 viewModel.removeById(post.id)
             }
+
             override fun onEdit(post: Post) {
-               viewModel.edit(post)
-               binding.edit.setText(post.content)
+                viewModel.edit(post)
+                binding.edit.setText(post.content)
             }
+
             override fun onShare(post: Post) {
                 viewModel.shareById(post.id)
             }
@@ -45,12 +50,12 @@ class MainActivity : AppCompatActivity() {
                     binding.list.smoothScrollToPosition(0)
                 }
             }
-            viewModel.edited.observe(this){ post ->
-                if (post.id !=0L){
+            viewModel.edited.observe(this) { post ->
+                if (post.id != 0L) {
                     binding.group.visibility = View.VISIBLE
                     binding.edit.setText(post.content)
                     binding.edit.focusAndShowKeyboard()
-            }else{
+                } else {
                     binding.group.visibility = View.INVISIBLE
                 }
             }
@@ -68,11 +73,10 @@ class MainActivity : AppCompatActivity() {
                 binding.edit.clearFocus()
                 AndroidUtils.hideKeyboard(it)
             }
-            binding.cancelButton.setOnClickListener{
+            binding.cancelButton.setOnClickListener {
+                viewModel.edit(empty)
                 binding.edit.setText("")
-                binding.group.visibility = View.INVISIBLE
             }
-
         }
     }
 }
