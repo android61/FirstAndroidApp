@@ -36,6 +36,4 @@ class PostViewModel : ViewModel() {
         edited.value = post
     }
 
-
-
 }
