@@ -39,17 +39,19 @@
         app:layout_constraintTop_toTopOf="@+id/avatar"
         tools:text="@sample/posts.json/data/author" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Material3.Button.IconButton"
         android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="4dp"
         android:backgroundTint="#FFFFFF"
-
+        app:icon="@drawable/menu_select"
+        app:iconTint="@color/menu_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_more_vert_24" />
+         />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
@@ -77,29 +79,41 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="content"/>
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/imageLike"
+        style="@style/Widget.Material3.Button.IconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="6dp"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="@android:color/transparent"
+        android:checkable="true"
+        android:textColor="@color/like_checkbox"
+        android:textSize="14sp"
+        app:icon="@drawable/favotite24"
+        app:iconPadding="4dp"
+        app:iconTint="@color/like_checkbox"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barrier2"
-        app:srcCompat="@drawable/favorite_fill0_wght400_grad0_opsz24"
-        tools:layout_editor_absoluteY="258dp" />
+        app:layout_constraintTop_toBottomOf="@id/barrier2" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/imageShare"
+        style="@style/Widget.Material3.Button.IconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="6dp"
-        android:backgroundTint="#FFFFFF"
+        android:checkable="true"
+        android:textSize="14sp"
+        android:textColor="@color/share_color_checkbox"
+        android:backgroundTint="@android:color/transparent"
+        app:iconPadding="4dp"
+        app:icon="@drawable/share_selector"
+        app:iconTint="@color/share_color_checkbox"
         app:layout_constraintBottom_toBottomOf="@+id/imageLike"
         app:layout_constraintStart_toEndOf="@+id/imageLike"
         app:layout_constraintTop_toBottomOf="@id/barrier2"
-        app:srcCompat="@drawable/share_fill0_wght400_grad0_opsz24" />
+         />
 
     <ImageView
         android:id="@+id/imageViews"
@@ -113,21 +127,6 @@
         app:layout_constraintTop_toTopOf="@+id/imageShare"
         app:srcCompat="@drawable/visibility_fill0_wght400_grad0_opsz24" />
 
-    <TextView
-        android:id="@+id/amtLike"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/imageLike"
-        app:layout_constraintStart_toEndOf="@+id/imageLike"
-        app:layout_constraintTop_toTopOf="@+id/imageLike" />
-
-    <TextView
-        android:id="@+id/amtShare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/imageShare"
-        app:layout_constraintStart_toEndOf="@+id/imageShare"
-        app:layout_constraintTop_toTopOf="@+id/imageShare" />
 
     <TextView
         android:id="@+id/amtView"

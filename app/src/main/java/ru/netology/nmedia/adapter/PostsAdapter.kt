@@ -40,11 +40,11 @@ fun bind(post: Post){
         author.text = post.author
         published.text = post.published
         content.text = post.content
-        amtLike.text = function(post.likes).toString()
-        amtShare.text = function(post.shares).toString()
+        imageLike.text = function(post.likes).toString()
+        imageShare.text = function(post.shares).toString()
         amtView.text = function(post.view).toString()
 
-        imageLike.setImageResource(if (post.likeByMe) R.drawable.favorite_24 else R.drawable.favorite_fill0_wght400_grad0_opsz24)
+        imageLike.isChecked = post.likeByMe
 
         imageLike.setOnClickListener {
             onInteractionListener.onLike(post)
