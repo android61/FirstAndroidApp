@@ -40,15 +40,14 @@
         tools:text="@sample/posts.json/data/author" />
 
     <com.google.android.material.button.MaterialButton
-        style="@style/Widget.Material3.Button.IconButton"
+        style="@style/menuCheckBox"
         android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="4dp"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="@android:color/transparent"
         app:icon="@drawable/menu_select"
-        app:iconTint="@color/menu_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
          />
@@ -81,39 +80,28 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/imageLike"
-        style="@style/Widget.Material3.Button.IconButton"
+        style="@style/likeCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
         android:backgroundTint="@android:color/transparent"
         android:checkable="true"
-        android:textColor="@color/like_checkbox"
         android:textSize="14sp"
         app:icon="@drawable/favotite24"
-        app:iconPadding="4dp"
-        app:iconTint="@color/like_checkbox"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrier2" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/imageShare"
-        style="@style/Widget.Material3.Button.IconButton"
+        style="@style/shareCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="6dp"
+        android:backgroundTint="@android:color/transparent"
         android:checkable="true"
         android:textSize="14sp"
-        android:textColor="@color/share_color_checkbox"
-        android:backgroundTint="@android:color/transparent"
-        app:iconPadding="4dp"
         app:icon="@drawable/share_selector"
-        app:iconTint="@color/share_color_checkbox"
         app:layout_constraintBottom_toBottomOf="@+id/imageLike"
-        app:layout_constraintStart_toEndOf="@+id/imageLike"
-        app:layout_constraintTop_toBottomOf="@id/barrier2"
-         />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barrier2" />
 
     <ImageView
         android:id="@+id/imageViews"
