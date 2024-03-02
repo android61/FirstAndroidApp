@@ -12,6 +12,7 @@ val empty = Post(
     content = "",
     published = "",
     likeByMe = false,
+    video = null
 
 )
 class PostViewModel : ViewModel() {

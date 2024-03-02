@@ -1,6 +1,7 @@
 package ru.netology.nmedia.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
@@ -17,6 +18,7 @@ interface OnInteractionListener{
     fun onRemove(post: Post)
     fun onEdit(post: Post)
     fun onShare(post: Post)
+    fun onVideo(post: Post)
 }
 //typealias onLikeListener =(Post) -> Unit
 //typealias onShareListener=(Post) -> Unit
@@ -24,7 +26,7 @@ interface OnInteractionListener{
 
 class PostsAdapter(private val onInteractionListener:OnInteractionListener): ListAdapter<Post, PostViewHolder>(PostDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        val view = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = ru.netology.nmedia.databinding.CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PostViewHolder(view, onInteractionListener)
     }
 
@@ -45,6 +47,12 @@ fun bind(post: Post){
         amtView.text = function(post.view).toString()
 
         imageLike.isChecked = post.likeByMe
+
+        if (post.video == null) {
+            binding.playVideoGroup.visibility = View.GONE
+        } else {
+            binding.playVideoGroup.visibility = View.VISIBLE
+        }
 
         imageLike.setOnClickListener {
             onInteractionListener.onLike(post)

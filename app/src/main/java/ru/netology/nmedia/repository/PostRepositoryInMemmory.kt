@@ -9,15 +9,16 @@ class PostRepositoryInMemoryImpl : PostRepository {
     private var nextId = 1L
     private var posts = listOf(
         Post(
-        id = nextId++,
-        author = "Нетология. Университет интернет-профессий будущего",
-        content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
-        published = "21 мая в 18:36",
-        likeByMe = false,
-        likes = 999,
-        shares = 999,
-        shareByMe = false,
-        view = 9
+            id = nextId++,
+            author = "Нетология. Университет интернет-профессий будущего",
+            content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
+            published = "21 мая в 18:36",
+            likeByMe = false,
+            video = null,
+            likes = 999,
+            shares = 999,
+            shareByMe = false,
+            view = 9
 
 
     ),
@@ -66,6 +67,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 likes = 10,
                 shares = 10,
                 shareByMe = false,
+                video = "https://www.youtube.com/watch?v=TtUWbSuFAcc",
                 view = 11
 
             ),
@@ -78,6 +80,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likes = 1500,
             shares = 1500,
             shareByMe = false,
+            video = null,
             view = 1500
 
 
@@ -103,6 +106,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likeByMe = false,
             likes = 15372,
             shares = 1278,
+            video = null,
             shareByMe = false,
             view = 987
 
@@ -164,6 +168,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likes = 1524598,
             shares = 12570,
             shareByMe = false,
+            video = null,
             view = 15652345
         )
     )

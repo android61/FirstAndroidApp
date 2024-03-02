@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="40dp"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <ImageView
         android:id="@+id/avatar"
@@ -67,8 +67,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="6dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:constraint_referenced_ids="background_video"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/background_video"
         tools:text="@sample/posts.json/data/content" />
 
     <androidx.constraintlayout.widget.Barrier
@@ -124,5 +125,35 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageViews"
         app:layout_constraintStart_toEndOf="@+id/imageViews"
         app:layout_constraintTop_toTopOf="@+id/imageViews" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/play_video_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="background_video, play" />
+
+    <ImageButton
+        android:id="@+id/background_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/background_vido"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/published"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
+
+    <ImageButton
+        android:id="@+id/play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_baseline_play_circle_outline"
+        app:layout_constraintBottom_toBottomOf="@id/background_video"
+        app:layout_constraintEnd_toEndOf="@id/background_video"
+        app:layout_constraintStart_toStartOf="@id/background_video"
+        app:layout_constraintTop_toTopOf="@id/background_video"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
