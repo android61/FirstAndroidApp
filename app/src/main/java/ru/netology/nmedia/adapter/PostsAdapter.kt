@@ -48,6 +48,18 @@ fun bind(post: Post){
 
         imageLike.isChecked = post.likeByMe
 
+        backgroundVideo.setOnClickListener {
+            if (post.video != null) {
+               onInteractionListener.onVideo(post)
+            }
+        }
+
+        play.setOnClickListener{
+            if (post.video != null) {
+                onInteractionListener.onVideo(post)
+            }
+        }
+
         if (post.video == null) {
             binding.playVideoGroup.visibility = View.GONE
         } else {
