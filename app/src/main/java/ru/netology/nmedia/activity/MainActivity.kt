@@ -1,11 +1,13 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.activity
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
@@ -14,7 +16,6 @@ import ru.netology.nmedia.repository.PostViewModel
 import ru.netology.nmedia.repository.empty
 import ru.netology.nmedia.util.AndroidUtils
 import ru.netology.nmedia.util.AndroidUtils.focusAndShowKeyboard
-import kotlin.math.floor
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +24,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
+
+        val newPostLauncher = registerForActivityResult(NewPostContract) { result ->
+            result ?: return@registerForActivityResult
+            viewModel.changeContentAndSave(result)
+        }
+        val editPostActivity =
+            registerForActivityResult(EditPostActivity()) { text ->
+                text?.let {
+                    viewModel.changeContentAndSave(text)
+                }
+            }
+
+
         val adapter = PostsAdapter(object : OnInteractionListener {
+
             override fun onLike(post: Post) {
                 viewModel.likeById(post.id)
             }
@@ -34,11 +49,22 @@ class MainActivity : AppCompatActivity() {
 
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
-                binding.edit.setText(post.content)
+                editPostActivity.launch(post.content)
+            }
+
+            override fun onVideo(post: Post) {
+                val intentVideo = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
+                startActivity(intentVideo)
             }
 
             override fun onShare(post: Post) {
-                viewModel.shareById(post.id)
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, post.content)
+                }
+                val chooser = Intent.createChooser(intent, "поделиться записью")
+                startActivity(chooser)
             }
         })
         binding.list.adapter = adapter
@@ -52,34 +78,21 @@ class MainActivity : AppCompatActivity() {
             }
             viewModel.edited.observe(this) { post ->
                 if (post.id != 0L) {
-                    binding.group.visibility = View.VISIBLE
-                    binding.edit.setText(post.content)
-                    binding.edit.focusAndShowKeyboard()
-                } else {
-                    binding.group.visibility = View.INVISIBLE
+                    return@observe
                 }
             }
-            binding.save.setOnClickListener {
-                val text = binding.edit.text.toString().trim()
-                if (text.isEmpty()) {
-                    Toast.makeText(this, "Ошибка. Пустой контент", Toast.LENGTH_LONG).show()
-                    return@setOnClickListener
-                }
 
-
-                viewModel.changeContentAndSave(text)
-
-                binding.edit.setText("")
-                binding.edit.clearFocus()
-                AndroidUtils.hideKeyboard(it)
+            binding.add.setOnClickListener {
+                newPostLauncher.launch()
             }
-            binding.cancelButton.setOnClickListener {
-                viewModel.edit(empty)
-                binding.edit.setText("")
-            }
+
         }
     }
 }
+
+
+
+
 
 
 
