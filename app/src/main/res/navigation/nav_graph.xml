@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="ru.netology.nmedia.activity.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first" >
+        android:label="NMedia"
+        tools:layout="@layout/fragment_first">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -18,8 +18,8 @@
     <fragment
         android:id="@+id/SecondFragment"
         android:name="ru.netology.nmedia.activity.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second" >
+        android:label="NMedia"
+        tools:layout="@layout/fragment_second">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
