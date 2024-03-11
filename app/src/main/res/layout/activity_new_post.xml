@@ -10,14 +10,12 @@
         android:id="@+id/edit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="top"
         android:background="@android:color/white"
+        android:gravity="top"
         android:hint="Введите текст"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
-        android:maxLines="6"
-        android:padding="8dp"
-         />
+        android:padding="8dp" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"

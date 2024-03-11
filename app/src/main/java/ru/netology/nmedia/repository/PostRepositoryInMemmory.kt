@@ -1,7 +1,9 @@
 package ru.netology.nmedia.repository
 
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import ru.netology.nmedia.activity.EditPostActivity
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.dto.function
 

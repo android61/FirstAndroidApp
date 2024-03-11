@@ -54,6 +54,8 @@ fun bind(post: Post){
             }
         }
 
+
+
         play.setOnClickListener{
             if (post.video != null) {
                 onInteractionListener.onVideo(post)
@@ -93,10 +95,9 @@ fun bind(post: Post){
     }
 }
 }
+
 object PostDiffCallback: DiffUtil.ItemCallback<Post>(){
     override fun areItemsTheSame(oldItem: Post, newItem: Post) = oldItem.id == newItem.id
-
-
 
     override fun areContentsTheSame(oldItem: Post, newItem: Post) = oldItem == newItem
 

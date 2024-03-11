@@ -3,8 +3,6 @@ package ru.netology.nmedia.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -14,16 +12,14 @@ import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.repository.PostViewModel
 import ru.netology.nmedia.repository.empty
-import ru.netology.nmedia.util.AndroidUtils
-import ru.netology.nmedia.util.AndroidUtils.focusAndShowKeyboard
 
 class MainActivity : AppCompatActivity() {
+    val viewModel: PostViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val viewModel: PostViewModel by viewModels()
 
         val newPostLauncher = registerForActivityResult(NewPostContract) { result ->
             result ?: return@registerForActivityResult
@@ -33,11 +29,15 @@ class MainActivity : AppCompatActivity() {
             registerForActivityResult(EditPostActivity()) { text ->
                 text?.let {
                     viewModel.changeContentAndSave(text)
+
                 }
+                viewModel.clear()
             }
 
 
+
         val adapter = PostsAdapter(object : OnInteractionListener {
+
 
             override fun onLike(post: Post) {
                 viewModel.likeById(post.id)
@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
                 editPostActivity.launch(post.content)
+
             }
 
             override fun onVideo(post: Post) {
@@ -57,7 +58,9 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intentVideo)
             }
 
+
             override fun onShare(post: Post) {
+
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     type = "text/plain"
@@ -66,7 +69,10 @@ class MainActivity : AppCompatActivity() {
                 val chooser = Intent.createChooser(intent, "поделиться записью")
                 startActivity(chooser)
             }
+
+
         })
+
         binding.list.adapter = adapter
 
         viewModel.data.observe(this) { posts ->
@@ -75,20 +81,29 @@ class MainActivity : AppCompatActivity() {
                 if (newPost) {
                     binding.list.smoothScrollToPosition(0)
                 }
+
             }
+
             viewModel.edited.observe(this) { post ->
                 if (post.id != 0L) {
                     return@observe
+
+                    }
                 }
+
             }
+
 
             binding.add.setOnClickListener {
                 newPostLauncher.launch()
-            }
 
+            }
         }
-    }
-}
+        }
+
+
+
+
 
 
 

@@ -1,10 +1,9 @@
 package ru.netology.nmedia.repository
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.dto.Post
-import ru.netology.nmedia.repository.PostRepository
-import ru.netology.nmedia.repository.PostRepositoryInMemoryImpl
 
 val empty = Post(
     id = 0,
@@ -16,14 +15,17 @@ val empty = Post(
     videoUrl = null
 
 )
-class PostViewModel : ViewModel() {
-    private val repository: PostRepository = PostRepositoryInMemoryImpl()
+class PostViewModel(application: Application) : AndroidViewModel(application) {
+    private val repository: PostRepository = PostRepositoryInMemoryImpl(
+
+    )
+
     val data = repository.getAll()
     val edited = MutableLiveData(empty)
 
     fun changeContentAndSave(content: String){
         edited.value?.let {
-            if (content != it.content ){
+            if (content != it.content){
                 repository.save(it.copy(content = content))
             }
             edited.value = empty
@@ -36,6 +38,9 @@ class PostViewModel : ViewModel() {
     fun removeById(id: Long) = repository.removebyId(id)
     fun edit(post: Post){
         edited.value = post
+    }
+    fun clear() {
+        edited.value = empty
     }
 
 }

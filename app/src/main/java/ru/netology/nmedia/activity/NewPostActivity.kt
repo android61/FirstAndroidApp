@@ -7,8 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.viewModels
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.ActivityNewPostBinding
+import ru.netology.nmedia.repository.PostViewModel
 import ru.netology.nmedia.repository.empty
 
 class NewPostActivity : AppCompatActivity() {
@@ -18,11 +20,13 @@ class NewPostActivity : AppCompatActivity() {
         val binding = ActivityNewPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val contents = intent.getStringExtra(Intent.EXTRA_TEXT)
 
         binding.edit.setText(contents)
 
         binding.ok.setOnClickListener {
+
             if (binding.edit.text.isNullOrBlank()) {
                 Toast.makeText(
                     this,
@@ -33,11 +37,15 @@ class NewPostActivity : AppCompatActivity() {
             } else {
                 val result = Intent().putExtra(Intent.EXTRA_TEXT, binding.edit.text.toString())
                 setResult(RESULT_OK, result)
+
             }
             finish()
         }
+
     }
+
 }
+
 
 object NewPostContract: ActivityResultContract<Unit, String?>(){
     override fun createIntent(context: Context, input: Unit): Intent =
