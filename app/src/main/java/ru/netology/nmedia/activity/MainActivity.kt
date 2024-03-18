@@ -84,13 +84,6 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            viewModel.edited.observe(this) { post ->
-                if (post.id != 0L) {
-                    return@observe
-
-                    }
-                }
-
             }
 
 

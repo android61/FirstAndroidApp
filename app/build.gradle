@@ -33,21 +33,22 @@ android {
     ndkVersion '25.2.9519653'
     buildToolsVersion '33.0.2'
 }
+def core_version = "1.12.0"
+def appcompat_version = "1.6.1"
+def mdc_version = "1.11.0"
+def constraintlayout_version = "2.1.4"
+def recyclerview_version = "1.3.2"
+def junit_version = "4.13.2"
+def ext_junit_version = "1.1.5"
+def espresso_core_version = "3.5.1"
+def activity_version = "1.8.2"
+def lifecycle_version = "2.7.0"
+def gson_version = "2.10.1"
 
 dependencies {
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.6'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.7.6'
-    def core_version = "1.12.0"
-    def appcompat_version = "1.6.1"
-    def mdc_version = "1.11.0"
-    def constraintlayout_version = "2.1.4"
-    def recyclerview_version = "1.3.2"
-    def junit_version = "4.13.2"
-    def ext_junit_version = "1.1.5"
-    def espresso_core_version = "3.5.1"
-    def activity_version = "1.8.2"
-    def lifecycle_version = "2.7.0"
 
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
     implementation "androidx.core:core-ktx:$core_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "com.google.android.material:material:$mdc_version"
@@ -56,6 +57,7 @@ dependencies {
     implementation "androidx.activity:activity-ktx:$activity_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "com.google.code.gson:gson:$gson_version"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
