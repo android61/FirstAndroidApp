@@ -2,27 +2,25 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    android:id="@+id/nav_main"
+    app:startDestination="@id/feedFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="ru.netology.nmedia.activity.FirstFragment"
-        android:label="NMedia"
-        tools:layout="@layout/fragment_first">
-
+        android:id="@+id/feedFragment"
+        android:name="ru.netology.nmedia.activity.FeedFragment"
+        android:label="fragment_feed"
+        tools:layout="@layout/fragment_feed">
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_feedFragment_to_newPostFragment"
+            app:destination="@id/newPostFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="ru.netology.nmedia.activity.SecondFragment"
-        android:label="NMedia"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+        android:id="@+id/newPostFragment"
+        android:name="ru.netology.nmedia.activity.NewPostFragment"
+        android:label="fragment_new_post"
+        tools:layout="@layout/fragment_new_post" />
 </navigation>
